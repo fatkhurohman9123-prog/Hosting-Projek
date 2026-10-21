@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seblak in aja | Prasmanan topping, Boyoteluk Siwalan</title>
+<meta name="description" content="Warung seblak prasmanan di Desa Boyoteluk, Kecamatan Siwalan. Ambil topping sendiri, nota langsung keluar. Dine in atau take away.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap" rel="stylesheet">
+<!--
+  Tugas Portofolio Potensi UMKM Desa
+  Nama : Fathku Rohman
+  NIM  : 101250041
+  Harga di halaman ini contoh, ubah di atribut data-harga dan di teks daftar menu.
+-->
+<style>
+  :root {
+    --cabai: #D62F1C;
+    --cabai-tua: #8E1B10;
+    --kerupuk: #FFD66B;
+    --kuah: #FFF3EC;
+    --mangkuk: #2A1411;
+    --pudar: #6E514A;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: "Bricolage Grotesque", "Segoe UI", Arial, sans-serif; background: var(--kuah); color: var(--mangkuk); line-height: 1.6; font-size: 1.05rem; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--mangkuk); outline-offset: 3px; }
+  .wrap { width: min(1080px, 92%); margin: 0 auto; }
+
+  header.top { background: var(--cabai); color: #fff; }
+  header.top .wrap { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; gap: 16px; flex-wrap: wrap; }
+  .logo { font-weight: 800; font-size: 1.3rem; text-decoration: none; letter-spacing: -0.02em; }
+  nav a { margin-left: 22px; text-decoration: none; font-weight: 600; }
+  nav a:hover { text-decoration: underline; text-underline-offset: 5px; }
+
+  .hero { background: var(--cabai); color: #fff; padding: 40px 0 90px; position: relative; overflow: hidden; }
+  .hero h1 { font-size: clamp(3.6rem, 12vw, 9rem); line-height: 0.92; font-weight: 800; letter-spacing: -0.045em; max-width: 9ch; }
+  .hero h1 span { display: block; color: var(--kerupuk); }
+  .hero p { max-width: 34rem; margin-top: 28px; font-size: 1.2rem; }
+  .btns { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn { display: inline-block; padding: 14px 26px; border-radius: 999px; font-weight: 800; text-decoration: none; border: 3px solid var(--mangkuk); font-family: inherit; font-size: 1rem; cursor: pointer; }
+  .btn.utama { background: var(--kerupuk); color: var(--mangkuk); }
+  .btn.utama:hover { background: #fff; }
+  .btn.polos { background: transparent; color: #fff; border-color: #fff; }
+  .btn.polos:hover { background: #fff; color: var(--cabai); }
+  .mangkuk { position: absolute; right: -90px; bottom: -120px; width: 420px; height: 420px; border-radius: 50%; background: var(--cabai-tua); box-shadow: inset 0 0 0 28px #B8240F, inset 0 0 0 56px var(--cabai-tua); }
+  .kerupuk { position: absolute; right: 120px; bottom: 60px; width: 120px; height: 120px; background: var(--kerupuk); border-radius: 55% 45% 60% 40% / 50% 60% 40% 50%; transform: rotate(-14deg); }
+
+  section { padding: 80px 0; }
+  h2 { font-size: clamp(2rem, 5vw, 3.2rem); line-height: 1.05; letter-spacing: -0.035em; font-weight: 800; margin-bottom: 18px; }
+  .intro { max-width: 36rem; color: var(--pudar); margin-bottom: 36px; }
+
+  .pilih input[type="radio"].tog { position: absolute; opacity: 0; pointer-events: none; }
+  .tab-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 28px; }
+  .tab-row label { cursor: pointer; padding: 12px 26px; border-radius: 999px; border: 3px solid var(--mangkuk); font-weight: 800; background: #fff; }
+  #dinein:checked ~ .tab-row label[for="dinein"],
+  #takeaway:checked ~ .tab-row label[for="takeaway"] { background: var(--mangkuk); color: var(--kerupuk); }
+  #dinein:focus-visible ~ .tab-row label[for="dinein"],
+  #takeaway:focus-visible ~ .tab-row label[for="takeaway"] { outline: 3px solid var(--cabai); outline-offset: 3px; }
+  .panel { display: none; background: #fff; border: 3px solid var(--mangkuk); border-radius: 18px; padding: 34px; }
+  #dinein:checked ~ .p-dinein,
+  #takeaway:checked ~ .p-takeaway { display: grid; grid-template-columns: 1.1fr 1fr; gap: 36px; }
+  .panel h3 { font-size: 1.7rem; letter-spacing: -0.02em; margin-bottom: 10px; }
+  .panel ul { list-style: none; }
+  .panel li { padding: 10px 0; border-bottom: 2px dotted #E4C9BF; }
+  .panel li:last-child { border-bottom: 0; }
+  .panel li strong { display: block; }
+
+  .menu { background: var(--mangkuk); color: var(--kuah); }
+  .menu .intro { color: #D9BDB3; }
+  .dua { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+  .menu h3 { font-size: 1.6rem; letter-spacing: -0.02em; margin-bottom: 4px; }
+  .menu .sub { color: #D9BDB3; font-size: 0.95rem; margin-bottom: 10px; }
+  .daftar { list-style: none; }
+  .daftar li { display: flex; align-items: baseline; gap: 12px; padding: 14px 0; border-bottom: 1px solid #5A3A34; }
+  .daftar.kolom { columns: 2; column-gap: 48px; }
+  .daftar.kolom li { break-inside: avoid; }
+  .pras-menu { margin-bottom: 56px; }
+  .daftar .nama { font-weight: 800; }
+  .daftar .isi { display: block; font-size: 0.92rem; color: #D9BDB3; font-weight: 400; }
+  .daftar .harga { margin-left: auto; font-weight: 800; color: var(--kerupuk); white-space: nowrap; }
+
+  /* Pesan + nota */
+  .pesan-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 44px; align-items: start; }
+  fieldset { border: 0; margin-bottom: 28px; }
+  legend { font-weight: 800; font-size: 1.25rem; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .isian { width: 100%; padding: 12px 14px; font: inherit; border: 3px solid var(--mangkuk); border-radius: 12px; background: #fff; color: var(--mangkuk); }
+  .opsi { display: flex; align-items: center; gap: 12px; padding: 10px 14px; margin-bottom: 8px; background: #fff; border: 2px solid #E4C9BF; border-radius: 12px; cursor: pointer; }
+  .opsi:has(input:checked) { border-color: var(--cabai); background: #FFE7DC; }
+  .opsi input { width: 20px; height: 20px; accent-color: var(--cabai); flex: 0 0 auto; }
+  .opsi .t { flex: 1; }
+  .opsi small { display: block; color: var(--pudar); font-size: 0.88rem; }
+  .opsi .h { font-weight: 800; white-space: nowrap; }
+  .topping-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .baris { display: flex; gap: 12px; }
+  .baris > * { flex: 1; }
+
+  .nota-box { position: sticky; top: 20px; }
+  .nota { background: #fff; padding: 26px 22px 34px; font-family: "Courier New", Courier, monospace; font-size: 0.95rem; line-height: 1.5; border: 2px solid var(--mangkuk); border-bottom: 0; position: relative; }
+  .nota::after { content: ""; position: absolute; left: -2px; right: -2px; bottom: -14px; height: 14px; background: linear-gradient(135deg, #fff 50%, transparent 50%) 0 0 / 14px 14px, linear-gradient(225deg, #fff 50%, transparent 50%) 0 0 / 14px 14px; }
+  .nota h3 { text-align: center; font-family: "Bricolage Grotesque", sans-serif; font-size: 1.5rem; letter-spacing: -0.02em; }
+  .nota .tengah { text-align: center; font-size: 0.85rem; color: var(--pudar); }
+  .nota hr { border: 0; border-top: 2px dashed var(--mangkuk); margin: 12px 0; }
+  .nota .meta { display: flex; justify-content: space-between; gap: 10px; }
+  .nota ul { list-style: none; }
+  .nota li { display: flex; justify-content: space-between; gap: 10px; }
+  .nota li span:first-child { flex: 1; }
+  .nota .total { font-weight: 700; font-size: 1.15rem; }
+  .nota .kosong { color: var(--pudar); }
+  .aksi { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .aksi .btn { flex: 1; text-align: center; padding: 12px 16px; font-size: 0.95rem; }
+  .kertas { margin-top: 26px; }
+  .kertas label { display: block; font-weight: 800; margin-bottom: 6px; }
+  .kertas .isian { padding: 10px 12px; }
+  .btn.pdf[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+  .btn.pdf:hover { background: #fff; }
+  .status { margin-top: 12px; font-size: 0.95rem; color: var(--pudar); min-height: 1.4em; }
+  .btn.wa { background: var(--cabai); color: #fff; border-color: var(--mangkuk); }
+  .btn.wa:hover { background: var(--cabai-tua); }
+  .btn.wa[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+  .btn.cetak { background: #fff; color: var(--mangkuk); }
+  .btn.cetak:hover { background: var(--kerupuk); }
+
+  .level { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .level div { padding: 22px; border-radius: 14px; border: 3px solid var(--mangkuk); }
+  .level div:nth-child(1) { background: #FFF; }
+  .level div:nth-child(2) { background: var(--kerupuk); }
+  .level div:nth-child(3) { background: #FF8A5C; }
+  .level div:nth-child(4) { background: var(--cabai); color: #fff; }
+  .level b { display: block; font-size: 1.3rem; margin-bottom: 6px; }
+  .level p { font-size: 0.95rem; }
+
+  .langkah { list-style: none; counter-reset: l; max-width: 640px; }
+  .langkah li { counter-increment: l; display: flex; gap: 18px; padding: 16px 0; }
+  .langkah li::before { content: counter(l); flex: 0 0 40px; height: 40px; border-radius: 50%; background: var(--cabai); color: #fff; font-weight: 800; display: flex; align-items: center; justify-content: center; }
+
+  .cerita { background: var(--kerupuk); }
+  .cerita p { max-width: 38rem; margin-bottom: 14px; }
+
+  footer { background: var(--cabai-tua); color: #FFE9DF; padding: 50px 0 36px; }
+  footer .kolom { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 30px; }
+  footer h4 { color: #fff; margin-bottom: 8px; }
+  footer small { display: block; margin-top: 34px; color: #F1B9A9; }
+
+  @media (max-width: 860px) {
+    .daftar.kolom { columns: 1; }
+    .pesan-grid, .dua { grid-template-columns: 1fr; }
+    .nota-box { position: static; }
+  }
+  @media (max-width: 760px) {
+    nav a { margin: 0 16px 0 0; }
+    .mangkuk, .kerupuk { opacity: 0.35; }
+    #dinein:checked ~ .p-dinein,
+    #takeaway:checked ~ .p-takeaway { grid-template-columns: 1fr; padding: 24px; }
+    .level { grid-template-columns: 1fr 1fr; }
+    footer .kolom { grid-template-columns: 1fr; }
+    .topping-grid, .baris { grid-template-columns: 1fr; display: block; }
+    .baris > * { margin-bottom: 10px; }
+    section { padding: 56px 0; }
+  }
+  @media print {
+    body * { visibility: hidden; }
+    .nota, .nota * { visibility: visible; }
+    .nota { position: absolute; left: 0; top: 0; width: 100%; border: 0; }
+    .nota::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#">Seblak in aja</a>
+    <nav>
+      <a href="#cara">Dine in / take away</a>
+      <a href="#menu">Menu</a>
+      <a href="#pesan">Pesan</a>
+      <a href="#lokasi">Lokasi</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="wrap">
+      <h1>Seblak <span>in aja.</span></h1>
+      <p>Warung seblak prasmanan dari Desa Boyoteluk. Ambil topping sesukamu, pilih mau makan di tempat atau dibungkus, dan notanya langsung keluar di layar.</p>
+      <div class="btns">
+        <a class="btn utama" href="#pesan">Mulai pilih topping</a>
+        <a class="btn polos" href="#menu">Lihat menu</a>
+      </div>
+    </div>
+    <div class="mangkuk" aria-hidden="true"></div>
+    <div class="kerupuk" aria-hidden="true"></div>
+  </div>
+
+  <section id="cara">
+    <div class="wrap pilih">
+      <h2>Makan di sini, atau bawa pulang?</h2>
+      <p class="intro">Dua-duanya bisa. Klik salah satu untuk lihat bedanya.</p>
+
+      <input class="tog" type="radio" name="cara" id="dinein" checked>
+      <input class="tog" type="radio" name="cara" id="takeaway">
+      <div class="tab-row">
+        <label for="dinein">Dine in</label>
+        <label for="takeaway">Take away</label>
+      </div>
+
+      <div class="panel p-dinein">
+        <div>
+          <h3>Ambil sendiri, duduk dulu baru dimasak</h3>
+          <p>Toppingnya ditata di meja prasmanan. Kamu ambil apa yang kamu mau, kami hitung, lalu seblak dimasak dan diantar ke mejamu selagi panas.</p>
+        </div>
+        <ul>
+          <li><strong>Air minum gratis</strong>Refill sepuasnya, kamu bakal butuh.</li>
+          <li><strong>Bisa request pedas</strong>Pilih levelnya di nota, nanti disesuaikan.</li>
+          <li><strong>Cocok buat rombongan</strong>Datang berempat atau berenam, mejanya bisa digabung.</li>
+        </ul>
+      </div>
+
+      <div class="panel p-takeaway">
+        <div>
+          <h3>Dibungkus, kuah dipisah</h3>
+          <p>Pilih topping di halaman ini dari rumah, kirim notanya lewat WhatsApp, lalu ambil kalau sudah matang. Kuah dan isian dipisah supaya kerupuknya tidak lembek di jalan.</p>
+        </div>
+        <ul>
+          <li><strong>Pesan dari rumah</strong>Nota langsung terkirim ke WhatsApp warung.</li>
+          <li><strong>Kemasan rapat</strong>Aman dibawa naik motor.</li>
+          <li><strong>Bawa wadah sendiri</strong>Boleh banget, dan ada potongan harga kecil.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <h2>Dua cara makan: prasmanan atau paketan</h2>
+      <p class="intro">Bingung milih? Ambil paketan. Mau bebas? Pilih prasmanan, lalu tambah minuman yang kamu suka.</p>
+      <div class="pras-menu">
+          <h3>Prasmanan</h3>
+          <p class="sub">Mangkuk dan kuah kencur Rp4.000, lalu tambah topping apa saja. Ada 27 pilihan.</p>
+          <ul class="daftar kolom">
+            <li><span class="nama">Kerupuk</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Makaroni</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Sawi</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Tahu</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Kol</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Pakcoy</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Tempe</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Cilok</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Telur puyuh</span><span class="harga">Rp1.000</span></li>
+            <li><span class="nama">Mie</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Kwetiau</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Bihun</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Sosis</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Bakso</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Siomay</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Otak-otak</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Jamur</span><span class="harga">Rp2.000</span></li>
+            <li><span class="nama">Telur</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Ceker</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Ayam suwir</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Dumpling keju</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Bakso urat</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Kornet</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Sosis jumbo</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Kikil</span><span class="harga">Rp4.000</span></li>
+            <li><span class="nama">Tetelan</span><span class="harga">Rp4.000</span></li>
+            <li><span class="nama">Udang</span><span class="harga">Rp4.000</span></li>
+          </ul>
+        </div>
+        <div class="dua">
+        <div>
+          <h3>Paketan</h3>
+          <p class="sub">Isian sudah ditentukan, harganya lebih hemat.</p>
+          <ul class="daftar">
+            <li><span class="nama">Paket Hemat<span class="isi">Seblak original, sosis, dan es teh</span></span><span class="harga">Rp15.000</span></li>
+            <li><span class="nama">Paket Komplit<span class="isi">Seblak dengan ceker, telur, bakso, dan es teh</span></span><span class="harga">Rp22.000</span></li>
+            <li><span class="nama">Paket Berdua<span class="isi">Dua porsi seblak ceker bakso dan dua es teh</span></span><span class="harga">Rp32.000</span></li>
+          </ul>
+        </div>
+        <div>
+          <h3>Minuman</h3>
+          <p class="sub">Bisa dipesan terpisah, tanpa harus makan seblak.</p>
+          <ul class="daftar">
+            <li><span class="nama">Es teh manis<span class="isi">Penyelamat setelah level 3</span></span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Teh hangat</span><span class="harga">Rp2.500</span></li>
+            <li><span class="nama">Es sirup</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Air mineral</span><span class="harga">Rp3.000</span></li>
+            <li><span class="nama">Wedang jahe<span class="isi">Hangat, cocok buat yang kedinginan</span></span><span class="harga">Rp3.500</span></li>
+            <li><span class="nama">Es jeruk</span><span class="harga">Rp4.000</span></li>
+            <li><span class="nama">Jeruk hangat</span><span class="harga">Rp3.500</span></li>
+            <li><span class="nama">Es lemon tea</span><span class="harga">Rp4.000</span></li>
+            <li><span class="nama">Es susu cokelat</span><span class="harga">Rp5.000</span></li>
+            <li><span class="nama">Es milo</span><span class="harga">Rp6.000</span></li>
+            <li><span class="nama">Es kopi susu</span><span class="harga">Rp6.000</span></li>
+            <li><span class="nama">Es kelapa muda</span><span class="harga">Rp7.000</span></li>
+            <li><span class="nama">Jus alpukat</span><span class="harga">Rp8.000</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pesan">
+    <div class="wrap">
+      <h2>Pilih toppingmu, notanya jadi sendiri</h2>
+      <p class="intro">Centang yang kamu mau. Nota di sebelah akan terisi dan totalnya dihitung otomatis.</p>
+
+      <div class="pesan-grid">
+        <form id="form" onsubmit="return false">
+          <fieldset>
+            <legend>Atas nama siapa?</legend>
+            <input class="isian" type="text" id="nama" placeholder="Nama kamu" maxlength="30" autocomplete="name">
+          </fieldset>
+
+          <fieldset>
+            <legend>Makan di mana?</legend>
+            <div class="baris">
+              <label class="opsi"><input type="radio" name="mode" value="Dine in" checked><span class="t">Dine in</span></label>
+              <label class="opsi"><input type="radio" name="mode" value="Take away"><span class="t">Take away</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Level pedas</legend>
+            <select class="isian" id="level">
+              <option value="0">Level 0, tanpa cabai</option>
+              <option value="1" selected>Level 1, pedas ringan</option>
+              <option value="2">Level 2, pedas sedang</option>
+              <option value="3">Level 3, pedas banget</option>
+            </select>
+          </fieldset>
+
+          <fieldset>
+            <legend>Paketan (boleh dikosongkan)</legend>
+            <label class="opsi"><input type="radio" name="paket" value="0" data-nama="" data-harga="0" checked><span class="t">Tidak pakai paket</span></label>
+            <label class="opsi"><input type="radio" name="paket" data-nama="Paket Hemat" data-harga="15000"><span class="t">Paket Hemat<small>Seblak original, sosis, es teh</small></span><span class="h">Rp15.000</span></label>
+            <label class="opsi"><input type="radio" name="paket" data-nama="Paket Komplit" data-harga="22000"><span class="t">Paket Komplit<small>Ceker, telur, bakso, es teh</small></span><span class="h">Rp22.000</span></label>
+            <label class="opsi"><input type="radio" name="paket" data-nama="Paket Berdua" data-harga="32000"><span class="t">Paket Berdua<small>Dua seblak ceker bakso, dua es teh</small></span><span class="h">Rp32.000</span></label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Prasmanan topping</legend>
+            <div class="topping-grid">
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Kerupuk" data-harga="1000"><span class="t">Kerupuk</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Makaroni" data-harga="1000"><span class="t">Makaroni</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Sawi" data-harga="1000"><span class="t">Sawi</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Tahu" data-harga="1000"><span class="t">Tahu</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Kol" data-harga="1000"><span class="t">Kol</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Pakcoy" data-harga="1000"><span class="t">Pakcoy</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Tempe" data-harga="1000"><span class="t">Tempe</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Cilok" data-harga="1000"><span class="t">Cilok</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Telur puyuh" data-harga="1000"><span class="t">Telur puyuh</span><span class="h">1.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Mie" data-harga="2000"><span class="t">Mie</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Kwetiau" data-harga="2000"><span class="t">Kwetiau</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Bihun" data-harga="2000"><span class="t">Bihun</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Sosis" data-harga="2000"><span class="t">Sosis</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Bakso" data-harga="2000"><span class="t">Bakso</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Siomay" data-harga="2000"><span class="t">Siomay</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Otak-otak" data-harga="2000"><span class="t">Otak-otak</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Jamur" data-harga="2000"><span class="t">Jamur</span><span class="h">2.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Telur" data-harga="3000"><span class="t">Telur</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Ceker" data-harga="3000"><span class="t">Ceker</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Ayam suwir" data-harga="3000"><span class="t">Ayam suwir</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Dumpling keju" data-harga="3000"><span class="t">Dumpling keju</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Bakso urat" data-harga="3000"><span class="t">Bakso urat</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Kornet" data-harga="3000"><span class="t">Kornet</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Sosis jumbo" data-harga="3000"><span class="t">Sosis jumbo</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Kikil" data-harga="4000"><span class="t">Kikil</span><span class="h">4.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Tetelan" data-harga="4000"><span class="t">Tetelan</span><span class="h">4.000</span></label>
+              <label class="opsi"><input type="checkbox" class="tp" data-nama="Udang" data-harga="4000"><span class="t">Udang</span><span class="h">4.000</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Minuman</legend>
+            <div class="topping-grid">
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es teh manis" data-harga="3000"><span class="t">Es teh manis</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Teh hangat" data-harga="2500"><span class="t">Teh hangat</span><span class="h">2.500</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es sirup" data-harga="3000"><span class="t">Es sirup</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Air mineral" data-harga="3000"><span class="t">Air mineral</span><span class="h">3.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Wedang jahe" data-harga="3500"><span class="t">Wedang jahe</span><span class="h">3.500</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es jeruk" data-harga="4000"><span class="t">Es jeruk</span><span class="h">4.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Jeruk hangat" data-harga="3500"><span class="t">Jeruk hangat</span><span class="h">3.500</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es lemon tea" data-harga="4000"><span class="t">Es lemon tea</span><span class="h">4.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es susu cokelat" data-harga="5000"><span class="t">Es susu cokelat</span><span class="h">5.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es milo" data-harga="6000"><span class="t">Es milo</span><span class="h">6.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es kopi susu" data-harga="6000"><span class="t">Es kopi susu</span><span class="h">6.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Es kelapa muda" data-harga="7000"><span class="t">Es kelapa muda</span><span class="h">7.000</span></label>
+              <label class="opsi"><input type="checkbox" class="mn" data-nama="Jus alpukat" data-harga="8000"><span class="t">Jus alpukat</span><span class="h">8.000</span></label>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="nota-box">
+          <div class="nota" id="nota" aria-live="polite">
+            <h3>Seblak in aja</h3>
+            <p class="tengah">Desa Boyoteluk, Kec. Siwalan</p>
+            <hr>
+            <div class="meta"><span id="n-no"></span><span id="n-tgl"></span></div>
+            <div class="meta"><span>Atas nama</span><span id="n-nama">-</span></div>
+            <div class="meta"><span>Cara makan</span><span id="n-mode">Dine in</span></div>
+            <div class="meta"><span>Level pedas</span><span id="n-level">1</span></div>
+            <hr>
+            <ul id="n-isi"></ul>
+            <hr>
+            <div class="meta total"><span>TOTAL</span><span id="n-total">Rp0</span></div>
+            <hr>
+            <p class="tengah">Terima kasih, selamat berkeringat.</p>
+          </div>
+          <div class="kertas">
+            <label for="lebar">Lebar kertas thermal</label>
+            <select class="isian" id="lebar">
+              <option value="58">58 mm (printer kecil)</option>
+              <option value="80">80 mm (printer kasir standar)</option>
+            </select>
+          </div>
+          <div class="aksi">
+            <button class="btn utama pdf" id="pdf" type="button" aria-disabled="true">Unduh nota PDF</button>
+            <a class="btn wa" id="wa" href="#" target="_blank" rel="noopener" aria-disabled="true">Kirim ke WhatsApp</a>
+            <button class="btn cetak" type="button" onclick="window.print()">Cetak langsung</button>
+          </div>
+          <p class="status" id="status" role="status"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="wrap">
+      <h2>Seberapa kuat kamu?</h2>
+      <p class="intro">Empat level pedas. Pemula sebaiknya mulai dari yang kedua, bukan yang keempat.</p>
+      <div class="level">
+        <div><b>Level 0</b><p>Gurih kencur saja, tanpa cabai. Aman buat anak kecil.</p></div>
+        <div><b>Level 1</b><p>Pedasnya baru menyapa. Masih bisa ngobrol sambil makan.</p></div>
+        <div><b>Level 2</b><p>Hidung mulai berair dan es teh mulai dilirik.</p></div>
+        <div><b>Level 3</b><p>Hanya untuk yang sudah berpengalaman. Kami sudah memperingatkan.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cerita">
+    <div class="wrap">
+      <h2>Kenapa namanya "in aja"?</h2>
+      <p>Kata "in" di situ punya dua arti. Pertama, dari "dine in" dan "take away", dua cara orang menikmati seblak di sini. Kedua, dari kebiasaan orang desa kalau mampir ke warung: "Masuk aja, duduk dulu."</p>
+      <p>Kami ingin warung ini terasa seperti itu. Tidak perlu bingung mau makan di tempat atau dibungkus, tidak perlu ragu pilih toppingnya. Masuk aja, ambil yang kamu suka, sisanya biar kami yang urus.</p>
+    </div>
+  </section>
+</main>
+
+<footer id="lokasi">
+  <div class="wrap">
+    <div class="kolom">
+      <div>
+        <h4>Seblak in aja</h4>
+        <p>Warung seblak prasmanan UMKM Desa Boyoteluk. Dine in dan take away.</p>
+      </div>
+      <div>
+        <h4>Lokasi</h4>
+        <p>Desa Boyoteluk, Kecamatan Siwalan.</p>
+      </div>
+      <div>
+        <h4>Hubungi kami</h4>
+        <p>WhatsApp: <a href="https://wa.me/6281916302798">0819-1630-2798</a></p>
+      </div>
+    </div>
+    <small>Tugas Portofolio Potensi UMKM Desa. Dibuat oleh Fathku Rohman (101250041).</small>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+  var NOMOR_WA = "6281916302798";
+  var nota = null;
+  var BASE = 4000;
+  var rp = function (n) { return "Rp" + n.toLocaleString("id-ID"); };
+  var $ = function (id) { return document.getElementById(id); };
+  var no = "#" + String(Math.floor(Math.random() * 9000) + 1000);
+
+  function perbarui() {
+    var baris = [], total = 0;
+    var paket = document.querySelector('input[name="paket"]:checked');
+    if (paket && paket.dataset.nama) {
+      var hp = parseInt(paket.dataset.harga, 10);
+      baris.push([paket.dataset.nama, hp]); total += hp;
+    }
+    var tp = document.querySelectorAll(".tp:checked");
+    if (tp.length) {
+      baris.push(["Mangkuk + kuah kencur", BASE]); total += BASE;
+      tp.forEach(function (c) {
+        var h = parseInt(c.dataset.harga, 10);
+        baris.push([c.dataset.nama, h]); total += h;
+      });
+    }
+    document.querySelectorAll(".mn:checked").forEach(function (c) {
+      var h = parseInt(c.dataset.harga, 10);
+      baris.push([c.dataset.nama, h]); total += h;
+    });
+    var nama = $("nama").value.trim() || "-";
+    var mode = document.querySelector('input[name="mode"]:checked').value;
+    var level = $("level").value;
+
+    $("n-no").textContent = no;
+    $("n-tgl").textContent = new Date().toLocaleString("id-ID", { dateStyle: "medium", timeStyle: "short" });
+    $("n-nama").textContent = nama;
+    $("n-mode").textContent = mode;
+    $("n-level").textContent = level;
+    $("n-total").textContent = rp(total);
+
+    var ul = $("n-isi");
+    ul.innerHTML = "";
+    if (!baris.length) {
+      ul.innerHTML = '<li class="kosong">Belum ada pesanan. Pilih paket, topping, atau minuman.</li>';
+    } else {
+      baris.forEach(function (b) {
+        var li = document.createElement("li");
+        var a = document.createElement("span"); a.textContent = b[0];
+        var h = document.createElement("span"); h.textContent = rp(b[1]);
+        li.appendChild(a); li.appendChild(h); ul.appendChild(li);
+      });
+    }
+
+    nota = baris.length ? { no: no, tgl: $("n-tgl").textContent, nama: nama, mode: mode, level: level, baris: baris, total: total } : null;
+    if (nota) { $("pdf").removeAttribute("aria-disabled"); } else { $("pdf").setAttribute("aria-disabled", "true"); }
+
+    var wa = $("wa");
+    if (!baris.length) {
+      wa.setAttribute("aria-disabled", "true"); wa.href = "#";
+    } else {
+      var teks = "Halo Seblak in aja, saya mau pesan.\nNota " + no + "\nAtas nama: " + nama + "\nCara makan: " + mode + "\nLevel pedas: " + level + "\n\n";
+      baris.forEach(function (b) { teks += "- " + b[0] + " " + rp(b[1]) + "\n"; });
+      teks += "\nTotal: " + rp(total);
+      wa.href = "https://wa.me/" + NOMOR_WA + "?text=" + encodeURIComponent(teks);
+      wa.removeAttribute("aria-disabled");
+    }
+  }
+  function buatPDF() {
+    var st = $("status");
+    if (!nota) { return; }
+    if (!window.jspdf) {
+      st.textContent = "Library PDF belum termuat. Sambungkan internet lalu muat ulang halaman, atau pakai tombol Cetak langsung.";
+      return;
+    }
+    var W = parseInt($("lebar").value, 10);
+    var M = 3;                       // margin kiri-kanan (mm)
+    var fs = W === 58 ? 8 : 9;       // ukuran huruf (pt)
+    var lh = fs * 0.3528 * 1.45;     // tinggi baris (mm)
+    var area = W - 2 * M;
+    var JSPDF = window.jspdf.jsPDF;
+
+    // Dokumen sementara hanya untuk mengukur lebar teks
+    var ukur = new JSPDF({ unit: "mm", format: [W, 200] });
+    ukur.setFont("courier", "normal"); ukur.setFontSize(fs);
+
+    var ops = [];
+    var baris = function (kiri, kanan, tebal) { ops.push({ t: "lr", l: kiri, r: kanan, b: tebal }); };
+    ops.push({ t: "c", s: "SEBLAK IN AJA", b: true, size: fs + 3 });
+    ops.push({ t: "c", s: "Desa Boyoteluk, Kec. Siwalan" });
+    ops.push({ t: "c", s: "WA 0819-1630-2798" });
+    ops.push({ t: "hr" });
+    baris(nota.no, nota.tgl);
+    baris("Nama", nota.nama);
+    baris("Cara makan", nota.mode);
+    baris("Level pedas", nota.level);
+    ops.push({ t: "hr" });
+    nota.baris.forEach(function (b) {
+      var harga = rp(b[1]);
+      var maks = area - ukur.getTextWidth(harga) - 2;
+      var potong = ukur.splitTextToSize(b[0], maks);
+      potong.forEach(function (p, i) { baris(p, i === 0 ? harga : ""); });
+    });
+    ops.push({ t: "hr" });
+    baris("TOTAL", rp(nota.total), true);
+    ops.push({ t: "hr" });
+    ops.push({ t: "c", s: "Terima kasih," });
+    ops.push({ t: "c", s: "selamat berkeringat!" });
+
+    // Hitung tinggi kertas, lalu gambar
+    var tinggi = M * 2;
+    ops.forEach(function (o) { tinggi += (o.t === "hr" ? lh * 0.7 : (o.size ? o.size * 0.3528 * 1.45 : lh)); });
+    var doc = new JSPDF({ unit: "mm", format: [W, Math.ceil(tinggi) + 4] });
+    var y = M;
+    ops.forEach(function (o) {
+      var size = o.size || fs;
+      var h = size * 0.3528 * 1.45;
+      doc.setFont("courier", o.b ? "bold" : "normal");
+      doc.setFontSize(size);
+      if (o.t === "hr") {
+        doc.setLineDashPattern([0.8, 0.8], 0);
+        doc.setLineWidth(0.2);
+        doc.line(M, y + lh * 0.2, W - M, y + lh * 0.2);
+        y += lh * 0.7;
+      } else if (o.t === "c") {
+        doc.text(o.s, W / 2, y + h * 0.75, { align: "center" });
+        y += h;
+      } else {
+        doc.text(o.l, M, y + h * 0.75);
+        if (o.r) { doc.text(o.r, W - M, y + h * 0.75, { align: "right" }); }
+        y += h;
+      }
+    });
+    doc.save("nota-seblak-in-aja-" + nota.no.replace("#", "") + ".pdf");
+    st.textContent = "Nota " + W + " mm sudah diunduh. Saat mencetak, pilih ukuran kertas sesuai PDF dan skala 100%.";
+  }
+  $("pdf").addEventListener("click", buatPDF);
+  document.getElementById("form").addEventListener("input", perbarui);
+  document.getElementById("form").addEventListener("change", perbarui);
+  perbarui();
+</script>
+</body>
+</html>
